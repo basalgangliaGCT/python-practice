@@ -11,6 +11,9 @@ class Stock:
     def sell(self, num):
         self.shares -= num
 
+    def __repr__(self) -> str:
+        return f"Stock('{self.name}', {self.shares}, {self.price})"
+    
 class MyStock(Stock):
     def __init__(self, name, shares, price, factor) -> None:
         super().__init__(name, shares, price)

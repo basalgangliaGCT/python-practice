@@ -1,4 +1,4 @@
-class TableFormatter:
+class TextTableFormatter:
     def headings(self,headers):
         '''
         Emit the table headings.
@@ -18,7 +18,7 @@ class TableFormatter:
         print()
     # raise NotImplementedError()
 
-class CSVTableFormatter(TableFormatter):
+class CSVTableFormatter():
     '''
     Output portfolio data in CSV format.
     '''
@@ -28,7 +28,7 @@ class CSVTableFormatter(TableFormatter):
     def row(self,rowdata):
         print(','.join(rowdata))
 
-class HTMLTableFormatter(TableFormatter):
+class HTMLTableFormatter():
     '''
     Output portfolio data in HTML format.
     '''
@@ -43,3 +43,21 @@ class HTMLTableFormatter(TableFormatter):
         for r in rowdata:
             print(f'<td>{r}</td>',end='')
         print('</tr>')
+
+def create_formatter(fmt):
+    if fmt == 'txt':
+        formatter = TextTableFormatter()
+    elif fmt == 'csv':
+        formatter = CSVTableFormatter()
+    elif fmt == 'html':
+        formatter = HTMLTableFormatter()
+    
+    return formatter
+
+def print_table(data,columns,fmt):
+    fmt.headings(columns)
+    for d in data:
+        pdata=[]
+        for c in columns:
+            pdata.append(str(getattr(d,c)))
+        fmt.row(pdata)

@@ -57,7 +57,7 @@ def print_report(reportdata,formatter):
 
 
 
-def portfolio_report(portfoliofile, pricefile):        
+def portfolio_report(portfoliofile, pricefile, fmt='txt'):        
     '''
     Make a stock report given portfolio and price data files.
     '''
@@ -69,13 +69,21 @@ def portfolio_report(portfoliofile, pricefile):
     report = make_report_data(portfolio, prices)
 
     # Print it out
-    formatter = tableformat.HTMLTableFormatter()
+    # if fmt == 'txt':
+    #     formatter = tableformat.TextTableFormatter()
+    # elif fmt == 'csv':
+    #     formatter = tableformat.CSVTableFormatter()
+    # elif fmt == 'html':
+    #     formatter = tableformat.HTMLTableFormatter()
+    # else:
+    #     raise RuntimeError(f'unknown the format {fmt}')
+    formatter = tableformat.create_formatter(fmt)
     print_report(report, formatter)
 
 def main(args):
-    if len(args) != 3:
-        raise SystemExit('Usage: %s portfile pricefile' % args[0])
-    portfolio_report(args[1], args[2])
+    if len(args) != 4:
+        raise SystemExit('Usage: %s portfile pricefile format' % args[0])
+    portfolio_report(args[1], args[2], args[3])
 
 if __name__ == '__main__':
     import sys
