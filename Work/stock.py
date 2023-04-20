@@ -1,5 +1,7 @@
 
+
 class Stock:
+    x = 42
     def __init__(self,name,shares,price) -> None:
         self.name = name
         self.shares = shares
