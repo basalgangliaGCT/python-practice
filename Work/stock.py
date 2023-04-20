@@ -2,11 +2,23 @@
 
 class Stock:
     x = 42
+    __slots__ = ('name','_shares','price')
     def __init__(self,name,shares,price) -> None:
         self.name = name
         self.shares = shares
         self.price = price
 
+    @property
+    def shares(self):
+        return self._shares
+    
+    @shares.setter
+    def shares(self,shares):
+        if not isinstance(shares,int):
+            raise TypeError('Expected int')
+        self._shares = shares
+
+    @property    
     def cost(self):
         return self.shares * self.price
     
@@ -23,12 +35,17 @@ class MyStock(Stock):
 
     def cost(self):
         # return 1.25 * self.shares * self.price
-        return self.factor * super().cost()
+        # return self.factor * super().cost()
+        return self.factor * super().cost
     
     def panic(self):
         self.sell(self.shares)
 
-    
+class NewStock(Stock):
+    @property
+    def yow(self):
+        print('Yow!')
+
 def main(argv):
     import fileparse
 
