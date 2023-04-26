@@ -49,7 +49,7 @@ def read_history(filename):
 
 # Format CSV record
 def csv_record(fields):
-    s = '"%s",%0.2f,"%s","%s",%0.2f,%0.2f,%0.2f,%0.2f,%d,%d' % tuple(fields)
+    s = '"%s",%0.2f,"%s","%s",%0.2f,%0.2f,%0.2f,%0.2f,%d' % tuple(fields)
     return s
 
 class StockTrack(object):
@@ -66,9 +66,7 @@ class StockTrack(object):
         self.initial = 0
         self.change  = 0
         self.date    = ""
-        self.no      = 0
     def add_data(self,record):
-        # self.no += 1
         self.history.append(record)
     def reset(self,time):
         self.time = time
@@ -109,7 +107,6 @@ class StockTrack(object):
         if self.price >= self.high:
             self.high = self.price
         self.change = self.price - self.initial
-        # self.no += 1
         
     # Increment the time by a delta
     def incr(self,dt):
@@ -120,9 +117,8 @@ class StockTrack(object):
         self.update()
 
     def make_record(self):
-        # self.no += 1       #add 1,1,1,2,2,2
         return [self.name,round(self.price,2),self.date,minutes_to_str(self.time),round(self.change,2),self.open,round(self.high,2),
-                round(self.low,2),self.volume,self.no]
+                round(self.low,2),self.volume]
 
 class MarketSimulator(object):
     def __init__(self):
@@ -153,7 +149,6 @@ class MarketSimulator(object):
         for s in self.stocks:
             self.prices[s] = self.stocks[s].price
             self.publish(self.stocks[s].make_record())
-            
         while self.time < 1000:
             for s in self.stocks:
                 self.stocks[s].incr(dt/60.0)    # Increment is in minutes
