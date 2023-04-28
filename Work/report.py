@@ -5,16 +5,16 @@ import stock
 import tableformat
 import portfolio
 
-def read_portfolio(filename):
+def read_portfolio(filename,**opt):
     '''
     Read a stock portfolio file into a list of dictionaries with keys
     name, shares, and price.
     '''
     with open(filename) as lines:
         # return fileparse.parse_csv(lines, select=['name','shares','price'], types=[str,int,float])
-        mdict = fileparse.parse_csv(lines, select=['name','shares','price'], types=[str,int,float])
-        mstock = [stock.Stock(d['name'],d['shares'],d['price']) for d in mdict]
-        
+        mdict = fileparse.parse_csv(lines, select=['name','shares','price'], types=[str,int,float],**opt)
+        # mstock = [stock.Stock(d['name'],d['shares'],d['price']) for d in mdict]
+        mstock = [stock.Stock(**d) for d in mdict]
         # return mstock
         return portfolio.Portfolio(mstock)
 
