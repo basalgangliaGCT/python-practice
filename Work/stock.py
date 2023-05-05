@@ -1,10 +1,14 @@
-from typedproperty import typedproperty
+# from typedproperty import typedproperty
+import typedproperty
 
 class Stock:
     x = 42
-    name = typedproperty('name',str)
-    shares = typedproperty('shares',int)
-    price = typedproperty('price', float)
+    # name = typedproperty('name',str)
+    # shares = typedproperty('shares',int)
+    # price = typedproperty('price', float)
+    name = typedproperty.String('name')
+    shares = typedproperty.Integer('shares')
+    price = typedproperty.Float('price')
 
     __slots__ = ('_name','_shares','_price')
     def __init__(self,name,shares,price) -> None:
@@ -60,7 +64,8 @@ def main(argv):
 
     portfolio = [Stock(d['name'],d['shares'],d['price']) for d in portdicts]
 
-    ms = sum([s.cost() for s in portfolio])
+    # ms = sum([s.cost() for s in portfolio])
+    ms = sum([s.cost for s in portfolio])
 
     print('the summary of cost is:' , ms)
     print(f'the summary of cost is: {ms}')
