@@ -1,0 +1,15 @@
+Q1: a和*a的用法，*的功能是什么？
+>>>a=[1,2,3]
+>>> a
+[1, 2, 3]
+>>> print(a)
+[1, 2, 3]
+>>> print(*a)
+1 2 3
+>>> *a
+  File "<stdin>", line 1
+SyntaxError: can't use starred expression here
+>>> b=*a
+  File "<stdin>", line 1
+SyntaxError: can't use starred expression here
+
