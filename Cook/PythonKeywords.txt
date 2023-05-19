@@ -1,2 +1,14 @@
 Python的内存机制
 
+Generator
+
+Duck Typing
+
+可迭代对象：如果一个对象实现了__iter__方法，那么这个对象就是可迭代对象。
+迭代器：如果一个对象同时实现了__iter__方法和__next__方法，它就是迭代器。
+iter函数的作用是从可迭代对象那里产生一个迭代器。Iterator = iter(Iterable)
+
+hashable type(such as list, set) and unhashable type(such as dicts)
+
+Naming a Slice
+
